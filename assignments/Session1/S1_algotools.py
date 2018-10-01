@@ -60,6 +60,53 @@ message='The average of positive samples of {list_value} is {res}'.format(list_v
 print(message)
 """
 
+#DEV StephLaudou
+
+def average_above_zero(tab):
+    """
+    brief : computs the average
+    
+    args : 
+    tab : a list of numeric value
+    
+    Return :
+        the computed average
+    Raises : 
+    Value error if no positive value  
+    Value error if input tab is ot a list  
+    
+    """
+    if not (isinstance(tab, list)):#on verifie si c'st bien une liste (eliminer les cas d'erreur)
+        raise ValueError('Expected a list as Input')
+
+    average = -99 
+    
+    valSum =0.0 #on le met en float
+    nPositiveValues=0
+    
+   
+    for val in tab:
+        if val>0:
+           valSum=valSum+float(val)
+           nPositiveValues=nPositiveValues+1
+ 
+    if nPositiveValues<= 0:
+         raise ValueError('No positive values found')
+    
+    average= valSum/nPositiveValues
+    return average
+
+
+#Test fonction average    
+test_tab=[1,2,3,-8] #¯ decl liste
+moy=average_above_zero(test_tab)
+print('Positive valus average =')
+print(moy)# print reçoit un bloc quidoit être d etype homogène
+print('Positive valus average ='+str(moy)) # methode moche
+print('Positive valus average ={v}'.format(v=moy)) # v = mot clé
+
+
+
 def max_value(input_list):
     ##
     # basic function able to return the max value of a list
