@@ -19,3 +19,6 @@ Evaluation will consist of continuous control and a mid term test.
 
 
 Evaluation will take into account your code quality and assignements coverage but also github pull request and commits naming conventions and code comments.
+
+
+Ceci est un 1er test de commit.
