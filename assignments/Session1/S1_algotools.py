@@ -4,7 +4,7 @@
 
 Ceci est un script temporaire.
 """
-
+#Average
 def average_above_zero(tab):
     """
     brief : computs the average
@@ -88,3 +88,33 @@ def max_value(tab):
 #print(resultMaxValue)
 #print(resultIndex)
 #print(str(resultMaxValue)+ " " +str(resultIndex))
+    
+
+#Reverse a table
+def reverse_table(tab):
+    """
+    Brief : reverse a list in place
+    
+    Args : 
+    tab : a list of numeric value
+    
+    Return :
+        the list reversed
+    Raises : 
+    Value error if input tab is ot a list
+    
+    """
+    if not (isinstance(tab, list)):#on vérifie si c'est bien une liste (éliminer les cas d'erreur)
+        raise ValueError('Expected a list as Input')
+    maxIndex = len(tab)-1
+    for i in range(len(tab)//2):
+        valeurOrig = tab[i]     
+        tab[i] = tab[maxIndex-i] #-1 car l indice commence à 0
+        tab[maxIndex-i] = valeurOrig
+    return tab
+
+
+#Tests fonction maximum value    
+#test_tab=[1,2,15,9] #¯ decl liste
+#test_tab=[] #¯ decl liste
+#print(reverse_table(test_tab))
