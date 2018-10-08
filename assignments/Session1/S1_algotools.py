@@ -46,14 +46,20 @@ def average_above_zero(tab):
 
 
 #Test fonction average    
-test_tab=[1,2,3,8] #¯ decl liste
-moy=average_above_zero(test_tab)
+#test_tab=[1,2,3,8] #¯ decl liste
+#moy=average_above_zero(test_tab)
 #print('Positive valus average =')
 #print(moy)# print reçoit un bloc quidoit être d etype homogène
 #print('Positive valus average ='+str(moy)) # methode moche
-print('Positive valus average ={v}'.format(v=moy)) # v = mot clé
+#print('Positive valus average ={v}'.format(v=moy)) # v = mot clé
 
-
+      
+#def average_above_zero_numpy(tab):     
+#    tab_np=np.array(tab)# conversion d el aliste en array numpy
+#    positive_values=tab_np[np.where(tab_np>0)]
+#    positive_values_mean=np.mean(positive_values)
+#    print(positive_values_mean)
+         
 #Maximum value
 def max_value(tab):
     """
