@@ -22,9 +22,9 @@ def load_S1_script():
 
 
 
-import s1_algotools as algo
+#import s1_algotools as algo
 
-algo.average_above_zeroaverage_above_zero()
+#algo.average_above_zeroaverage_above_zero()
 
 #load the scripts to check
 def test_session1script_exists():
