@@ -171,3 +171,22 @@ def roi_bbox(image):
 #print(len(image[0]))# nb de colonnes de la ligne 1
 #print(len(image))# nb de lignes de l'image
 #print(roi_bbox(image))
+
+
+#def random_fill_sparse(matrix,K):
+#
+##    margeSupLine=
+##    margeSupColumn=
+##    
+#    while i > K:
+#        for nlig in range(len(matrix)):
+#            for ncol in range (len(matrix[0])):
+#                if  image[nlig][ncol] != "Z"
+                    
+    
+    
+#Tests nandom filling
+#matrix = np.array([[A,A,A,A,A,A],[A,A,A,A,A,A],[A,A,A,A,A,A],[A,A,A,A,A,A],[A,A,A,A,A,A]])
+#import random
+#testAlea = random.random()
+#print(testAlea)
