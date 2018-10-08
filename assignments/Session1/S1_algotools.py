@@ -46,12 +46,12 @@ def average_above_zero(tab):
 
 
 #Test fonction average    
-#test_tab=[1,2,3,-8] #¯ decl liste
-#moy=average_above_zero(test_tab)
+test_tab=[1,2,3,8] #¯ decl liste
+moy=average_above_zero(test_tab)
 #print('Positive valus average =')
 #print(moy)# print reçoit un bloc quidoit être d etype homogène
 #print('Positive valus average ='+str(moy)) # methode moche
-#print('Positive valus average ={v}'.format(v=moy)) # v = mot clé
+print('Positive valus average ={v}'.format(v=moy)) # v = mot clé
 
 
 #Maximum value
