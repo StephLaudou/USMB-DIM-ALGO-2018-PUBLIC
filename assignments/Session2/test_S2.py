@@ -31,7 +31,6 @@ def test_session1script_exists():
         print('Expected script not found, carrefuly check the assignement instructions ')
         assert False
 
-
-#def test_average():
-#    test_tab=[1,2,3,-8]
-#    assert average_above_zero(test_tab) = 3.5
+def test_average():
+    test_tab=[1,2,3,8]
+    assert load_S1_script().average_above_zero(test_tab) == 3.5
