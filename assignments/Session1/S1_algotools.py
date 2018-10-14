@@ -5,9 +5,10 @@
 Ceci est un script temporaire.
 """
 
-#Bounding Box
+
 import numpy as np
 
+import random
 
 #Average
 def average_above_zero(tab):
@@ -179,20 +180,55 @@ def roi_bbox(image):
 #print(roi_bbox(image))
 
 
-#def random_fill_sparse(matrix,K):
-#
-##    margeSupLine=
-##    margeSupColumn=
-##    
-#    while i > K:
-#        for nlig in range(len(matrix)):
-#            for ncol in range (len(matrix[0])):
-#                if  image[nlig][ncol] != "Z"
-                    
+def random_fill_sparse(table,K):
+    """
+    brief : fills in a matrix randomly
     
+    args : 
+        matrix : empty matrix
+        K : number of cells to be filled in
+    
+    Return :
+        the matrix (numpy array) filled in with "X" values (char)
+    
+    Raises : 
+        K must be smaller than the table size
+        The table must contain Char type values 
+    """
+
+    i=0
+    y=0#matrix lines
+    x=0#matrix column
+    
+    if K>table.size:
+         raise ValueError('K is out of bounds')
+         
+    if table.dtype != "<U1":
+         raise ValueError('The array type must be Char')
+      
+    
+    while i < K:
+        y=random.randrange(0,len(table)-1)
+        x=random.randrange(0,len(table[0])-1)
+        if table[y][x] != "X":
+            table[y][x] = "X"
+            i=i+1
+    return table
+        
+        
+      
     
 #Tests nandom filling
-#matrix = np.array([[A,A,A,A,A,A],[A,A,A,A,A,A],[A,A,A,A,A,A],[A,A,A,A,A,A],[A,A,A,A,A,A]])
-#import random
-#testAlea = random.random()
-#print(testAlea)
+#matrix = np.array([["","","","","",""],["","","","","",""],["","","","","",""]])
+#matrix = np.array([[0,0,0,0,0,0],[0,0,1,1,1,0],[0,0,1,1,0,0],[0,0,0,1,1,0],[0,0,0,0,0,0]])
+#testLen = len(matrix)
+#print(testLen)
+#testCount = matrix.size
+#print(testCount)
+#randomX=random_fill_sparse(matrix,4)
+#print(matrix.astype(str))
+#print(matrix.dtype)
+#print(matrix)
+#randomX=random_fill_sparse(matrix,20)
+#print(randomX)
+
