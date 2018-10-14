@@ -232,3 +232,38 @@ def random_fill_sparse(table,K):
 #randomX=random_fill_sparse(matrix,20)
 #print(randomX)
 
+def remove_whitespace(table):
+    """
+    brief : remove whitespace characters in a string
+    
+    args : 
+        table: string
+        
+        Return : string without whitespace
+        
+    
+    Raises : 
+        
+        
+    """
+    i = 0
+    while i < len(table):
+        if table[i] == " ":
+            if i+1 < len(table):
+                table = table[:i] + table[i+1:]
+            else:
+                table = table[:i]
+        else:
+            i += 1
+    
+    
+    return table
+
+#str = 'st ri ng'
+#for i in range(0, len(str)):
+#    if str[i] == " ":
+#        print("toto")
+    
+#str = '    s t r i n g     '
+#str = 'string '
+#print('*'+remove_whitespace(str)+'*')
