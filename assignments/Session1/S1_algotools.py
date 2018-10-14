@@ -267,3 +267,34 @@ def remove_whitespace(table):
 #str = '    s t r i n g     '
 #str = 'string '
 #print('*'+remove_whitespace(str)+'*')
+    
+
+def shuffle(list_in):
+    """
+    brief : select once and only once items of a list
+    
+    args : 
+        list
+    
+    Return : a new list with shuffled items
+        
+    
+    Raises : 
+        
+        
+    """
+    
+    list_out=[]
+    i=0 #index list for random function
+    
+    while len(list) > 0:
+        i=random.randint(0,len(list)-1)
+        list_out.append(list[i])
+        del list[i]
+    
+    return list_out
+
+#list= ["pomme","pêche","poire","abricot"]
+#print(shuffle(list))
+        
+        
