@@ -4,6 +4,24 @@ Created on Sun Oct 14 14:43:28 2018
 
 @author: Stephanie
 """
+
+"""
+    brief : dice game
+    The winner is the first obtaining at least 100 points
+    If the dice shows 1, the score does not increase
+    
+    args : 
+    question : used in yes_no function : It is the question to be asked to the player
+    
+    Return :
+    Winner and Scores
+    
+        
+    Raises : 
+    
+    
+    """
+    
 import random
 
 
@@ -28,7 +46,7 @@ computerScore = 0
 winScore=100
 result=''
 computerLimit=14
-print("Au tour du joueur")
+print("It is player's turn")
 
 while (userScore<winScore and computerScore<winScore):    
     turn=True
@@ -36,11 +54,11 @@ while (userScore<winScore and computerScore<winScore):
      
     while turn == True:#on commence un tour
         dice=random.randint(1,6)#on lance le dé.
-        print("Tirage de dé: {}".format(dice))
+        print("Roll the dice: {}".format(dice))
         if dice != 1:
             turnScore = turnScore + dice
             if player == 1:#si c'est le tour du user   
-                answer = yes_no('Voulez-vous continuer? ({})'.format(turnScore))
+                answer = yes_no('Do you want to continue? ({})'.format(turnScore))
                 if answer == True:# le joueur a dit qu'il voulait continuer
                     turn=True#le tour continue
                 else:
@@ -56,20 +74,20 @@ while (userScore<winScore and computerScore<winScore):
                     turn=False
         else:
             turn = False
-    print('Points de ordinateur : {}'.format(computerScore))
-    print('Points du joueur : {}'.format(userScore))    
+    print('Computer Score : {}'.format(computerScore))
+    print('Player Score : {}'.format(userScore))    
     
     if player == 2: 
         player = 1
-        print("Au tour du Joueur")
+        print("It is player's turn")
     else:
         player = 2
-        print("Au tour de l'Ordinateur")
+        print("It is computer's turn")
                
 if userScore>computerScore:
-    result = "Le joueur a gagné : {} points à {} points pour l'ordinateur".format(userScore,computerScore)
+    result = " Player wins : {} points to {} points for computer".format(userScore,computerScore)
 else:
-    result = "L'ordinateur a gagné : {} points à {} points pour le joueur".format(computerScore,userScore)
+    result = "Computer wins : {} points to {} points for the player".format(computerScore,userScore)
 print(result)
 
 
