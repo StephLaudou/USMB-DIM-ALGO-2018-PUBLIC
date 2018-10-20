@@ -296,5 +296,49 @@ def shuffle(list_in):
 
 #list= ["pomme","pêche","poire","abricot"]
 #print(shuffle(list))
+
+
+def sort_selective(list):
+    """
+    brief : Sort a list with the selective strategy
+    
+    args : 
+    list : a list of numeric value
+    
+    Return :
+        Sorted list in ascending order
+    Raises : 
+ 
+    
+    """
+    iLastCompare = len(list)-1 #last position to be compared
+    
+    for iNotSorted in range(0,iLastCompare):# on ne traite pas le dernier indice
+        iSmallest = iNotSorted
         
+        for iSearch in range(iSmallest,len(list)):
+            if list[iSmallest] > list[iSearch]:
+                iSmallest = iSearch
+    
+        backUpValue = list[iNotSorted]
+        list[iNotSorted] = list[iSmallest]
+        list[iSmallest] = backUpValue
+
+    return list
+
+#list=[3,1]        
+#list=[10,-15,7,1,3,3,9,12,4]
+#list=[10,15,7,1,3,3,9,12,4]
+#list=[]
+#list=[9,12,4]
+#print(sort_selective(list))
+
+
+
+
+
+
+
+
+
         
