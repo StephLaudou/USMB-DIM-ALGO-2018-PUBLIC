@@ -332,6 +332,40 @@ def sort_selective(list):
 #list=[]
 #list=[9,12,4]
 #print(sort_selective(list))
+    
+
+def sort_bubble(list):
+    """
+    brief : Sort a list with the bubble strategy
+    
+    args : 
+    list : a list of numeric value
+    
+    Return :
+        Sorted list in ascending order
+    Raises : 
+    
+    """
+               
+    for iSortedRight in range(len(list),0,-1):
+        for j in range(0,iSortedRight-1):
+            if list[j]>list[j+1]:
+                backUpValue = list[j]
+                list[j] = list[j+1]
+                list[j+1] = backUpValue
+  
+                
+    return list
+
+#list=[3,1]
+#list=[1,2,3]
+#list=[10,15,7,1,3,3,9,12]
+#list=[10,15,7,1,3,3,9,12,4]
+#list=[9,12,4]
+#list=[1,0,-15,7,1,3,3,9,12,4]
+
+
+#print(sort_bubble(list))
 
 
 
