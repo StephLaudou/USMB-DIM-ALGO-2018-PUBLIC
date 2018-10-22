@@ -103,28 +103,93 @@ def max_value(tab):
     
 
 #Reverse a table
-def reverse_table(tab):
+#-----------------VERSION CORRIGEE--------------------------------
+def reverse_table(inputList):
     """
-    Brief : reverse a list in place
-    
-    Args : 
-    tab : a list of numeric value
-    
-    Return :
-        the list reversed
-    Raises : 
-    Value error if input tab is ot a list
+    basic function able to revert a list
+    args:
+        inputlist : the input list to be reverses
+    return: the reversed list
     
     """
-    if not (isinstance(tab, list)):#on vérifie si c'est bien une liste (éliminer les cas d'erreur)
+    #basic input data type check
+    if not (isinstance(inputList, list)):#on vérifie si c'est bien une liste (éliminer les cas d'erreur)
         raise ValueError('Expected a list as Input')
-    maxIndex = len(tab)-1
-    for i in range(len(tab)//2):
-        valeurOrig = tab[i]     
-        tab[i] = tab[maxIndex-i] #-1 car l indice commence à 0
-        tab[maxIndex-i] = valeurOrig
-    return tab
+    
+    
+    #revert a list
+    listLen=len(inputList)
+    loopMaxID=int(np.floor(listLen/2))
+    listLen-=1 # si on envoie une liste vide on ne rentre jamais dans la boucle
+    #loop over the half of the list
+    
+    #pb ici = range alloue la memoire pour toute la liste => pb si longue liste
+    # => utiliser xrange si python2
+    for idx in range(loopMaxID): #on utilise fonction floor de numpy pour avoir val entière
+        element=inputList[listLen-idx]
+        inputList[listLen-idx]=inputList[idx];
+        inputList[idx]=element
+    return inputList
 
+
+#TEST LISTE VIDE
+#TEST LISTE 1 ELET
+#TEST LISTE PAIRE et IMPAIRE
+#Tests fonction maximum value    
+#testList=[1,2,3,4] #¯ decl liste
+#print('reverseTable: {inL}=>{out}'.format(inL=testList,out=reverse_table(testList)))
+# pb de ce print il inverse la liste vant l'affichage (mm buffer ????)
+# donc on fait
+
+#import copy 
+#testList_copy=copy.deepcopy(testList)
+#print('reverseTable:{inL}=>{out}'.format(inL=testList_copy,out=reverse_table(testList)))
+#print(reverse_table(testList))
+#
+###TEST
+#def test_revertTable_empty():
+#    testList=[]
+#        assert testList==reverse_table(testList)
+#    
+#def test_revertTable_singleElement():
+#    testList=[1]
+#        assert testList==reverse_table(testList)
+#    
+#def test_revertTable_evenElement():
+#    testList=[1,2]
+#    import copy
+#    testList_copy=copy.deepcopy(testList)
+#    print('reverseTable:{inL}=>{out}'.format(inL=testList_copy,out=reverse_table(testList))) 
+#    assert[2,1]==reverse_table(testList)
+#    
+#def test_revertTable_oddElement():
+#    testList=[1,2,3]  
+#    assert[3,2,1]==reverse_table(testList)
+
+
+#----------------MA VERSION----------------------------------------
+#def reverse_table(tab):
+#    """
+#    Brief : reverse a list in place
+#    
+#    Args : 
+#    tab : a list of numeric value
+#    
+#    Return :
+#        the list reversed
+#    Raises : 
+#    Value error if input tab is ot a list
+#    
+#    """
+#    if not (isinstance(tab, list)):#on vérifie si c'est bien une liste (éliminer les cas d'erreur)
+#        raise ValueError('Expected a list as Input')
+#    maxIndex = len(tab)-1
+#    for i in range(len(tab)//2):
+#        valeurOrig = tab[i]     
+#        tab[i] = tab[maxIndex-i] #-1 car l indice commence à 0
+#        tab[maxIndex-i] = valeurOrig
+#    return tab
+#
 
 #Tests fonction maximum value    
 #test_tab=[1,2,15,9] #¯ decl liste
@@ -133,43 +198,103 @@ def reverse_table(tab):
     
 
 #Bounding Box
-def roi_bbox(image):
-    """
-    Brief : return an array which contains the coordinates of the bounding box of an image    
+#-----------------VERSION CORRIGEE--------------------------------
+def roi_bbox(inputMat):
+    roi=None
     
-    Args : image : numpy array, 2D Matrix with binary values
     
-    Return : numpy array which contains following coordinates  : top left, top right, bottom left, bottom right
+    
+    #basic input data type check
+    if not (isinstance(inputMat, np.ndarray)):
+        raise ValueError('Expected an array as Input')
+    if not (inputMat.dtype == np.bool):
+        raise ValueError('Expected input of type mumpy.bool')
         
-    Raises : 
-    
-    
-    """
-    #coordonnées des points angle de la matrice / Initialisation avec la taille de l'image
-    #valeur des points transposée pour que la boucle marche
-    #Point en haut à gauche 
-    xHG=len(image[0])-1#nb de colonnes à la première ligne POURQUOI -1 FIXME
-    yHG=len(image)-1#nb de ligne de l'image
-    #Point en bas à droite
-    xBD=0#colonne
-    yBD=0#ligne
-    
-    #je parcours les cases du tableau et analyse celles = 1 (si 1, elle appartient à l'image)
-    for nlig in range(len(image)):
-        for ncol in range (len(image[0])):
-            if image[nlig][ncol] == 1:
-                if nlig<yHG:
-                    yHG=nlig
-                if nlig>yBD:
-                    yBD=nlig
-                if ncol<xHG:
-                    xHG=ncol
-                if ncol>xBD:
-                    xBD=ncol
-    
-    arrayCoordinates=np.array([[xHG,yHG],[xBD,yHG],[xHG,yBD],[xBD,yBD]])
+    lmin=inputMat.shape[0]
+    lmax=0
+    cmin=inputMat.shape[1]
+    cmax=0
+        
+    for l in range(inputMat.shape[0]):# .shape donne le tuple
+        for c in range(inputMat.shape[1]):
+            if l<lmin:
+                lmin=l
+            if l>lmax:
+                lmax=l
+            if c<cmin:
+                cmin=c
+            if c>cmax:
+                cmax=c
+    roi=[[lmin,cmin],
+         [lmin,cmax],
+         [lmax,cmin],
+         [lmax,cmax]]
+    return np.array(roi)
 
-    return arrayCoordinates
+#inputMat=np.ones((5.6),dtype=np.bool) #permet de créer une matrice de binaire, 5 li 6 col ones = Trus
+##inputMat=np.zeros((5,6),dtype=np.bool) #permet de créer une matrice de binaire, 5 li 6 col zero= False
+#fill some points within it
+#inputMat[2.3]=True
+#inputMat[2.4]=True
+#OU
+##inputMat[2:4,3:5]=np.ones((2,2),dtype=np.bool) #on remplit avec des true en créant une nouvelle petite matrice
+##print(inputMat.shape[0])#nb de ligne
+##print(inputMat.shape[1])#nb de colonne
+##print('inputMat='+str(inputMat))
+##roi=roi_bbox(inputMat)
+##print('roi='+str(roi))
+
+
+#Autre solution 
+#linelist,collist = numpy.nonzero(inputMAt)#Autre solution possible en python => 1 seule boucle et on parcourt moins de ligne
+#
+#for nonnullitem on range(len(lienlist))::
+#    c,l=(linelist[id],collist[id])
+#    if c<cmin.....:
+#Autre solution  
+#4 boucles qu'on peut paralleliser    
+
+
+
+
+#----------------MA VERSION----------------------------------------
+#def roi_bbox(image):
+#    """
+#    Brief : return an array which contains the coordinates of the bounding box of an image    
+#    
+#    Args : image : numpy array, 2D Matrix with binary values
+#    
+#    Return : numpy array which contains following coordinates  : top left, top right, bottom left, bottom right
+#        
+#    Raises : 
+#    
+#    
+#    """
+#    #coordonnées des points angle de la matrice / Initialisation avec la taille de l'image
+#    #valeur des points transposée pour que la boucle marche
+#    #Point en haut à gauche 
+#    xHG=len(image[0])-1#nb de colonnes à la première ligne POURQUOI -1 FIXME
+#    yHG=len(image)-1#nb de ligne de l'image
+#    #Point en bas à droite
+#    xBD=0#colonne
+#    yBD=0#ligne
+#    
+#    #je parcours les cases du tableau et analyse celles = 1 (si 1, elle appartient à l'image)
+#    for nlig in range(len(image)):
+#        for ncol in range (len(image[0])):
+#            if image[nlig][ncol] == 1:
+#                if nlig<yHG:
+#                    yHG=nlig
+#                if nlig>yBD:
+#                    yBD=nlig
+#                if ncol<xHG:
+#                    xHG=ncol
+#                if ncol>xBD:
+#                    xBD=ncol
+#    
+#    arrayCoordinates=np.array([[xHG,yHG],[xBD,yHG],[xHG,yBD],[xBD,yBD]])
+#
+#    return arrayCoordinates
 
 #Tests bounding box
 #image = np.array([[0,0,0,0,0,0],[0,0,1,1,1,0],[0,0,1,1,0,0],[0,0,0,1,1,0],[0,0,0,0,0,0]]) #¯ decl liste
