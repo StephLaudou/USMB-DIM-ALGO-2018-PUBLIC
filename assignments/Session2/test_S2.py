@@ -27,7 +27,8 @@ def test_session1script_exists():
     try:
         load_S1_script()
         assert True
-    except  ImportError,e:
+    #except  ImportError,e:
+    except  ImportError:
         print('Expected script not found, carrefuly check the assignement instructions ')
         assert False
 
@@ -66,14 +67,15 @@ def test_S1_selective_average_with_zeros_values():
 def test_S1_selective_average_with_negative_values():
     ##
     # @test validates average_above_zero works fine with integer values <=0
-    check_S1_selective_average([0,-7])
-
+    #check_S1_selective_average([0,-7])
+    check_S1_selective_average([8,7,-7])
+    
 def test_S1_selective_average_with_string_values():
     ##
     # @test validates average_above_zero works fine with integer values <=0
     check_S1_selective_average(['ab','c'])
     
-def test_S1_selective_average_with_string_values():
+def test_S1_selective_average_with_empty_list():
     ##
     # @test validates average_above_zero works fine with an empty list
     try:
@@ -85,6 +87,7 @@ def test_S1_selective_average_with_string_values():
 
 ##max_value
     # @test validates max_value works  with input which is not a list
+def test_S1_max_value_not_a_list():
     try:
         test_MVList=100
         load_S1_script().max_value(test_MVList)
@@ -92,6 +95,7 @@ def test_S1_selective_average_with_string_values():
     except ValueError:
         assert True
         
+def test_S1_max_value_empty_list():       
     # @test validates max_value works  with input which is an empty list
     try:
         test_MVList=[]
@@ -99,11 +103,14 @@ def test_S1_selective_average_with_string_values():
         assert False
     except ValueError:
         assert True
-    
+        
+def test_S1_max_value_standard_list():   
     # @test validates max_value works  with input which is an empty list
     test_MVList=[1,2,3,15,9]
     assert load_S1_script().max_value(test_MVList) == (15,3)
     
+
+
     
     
     

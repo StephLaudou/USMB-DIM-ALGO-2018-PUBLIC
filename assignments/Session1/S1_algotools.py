@@ -96,12 +96,12 @@ def max_value(tab):
 
 
 #Tests fonction maximum value    
-test_tab=[1,2,3,15,9] #¯ decl liste
-resultMaxValue,resultIndex=max_value(test_tab)
+#test_tab=[1,2,3,15,9] #¯ decl liste
+#resultMaxValue,resultIndex=max_value(test_tab)
 #print(resultMaxValue)
 #print(resultIndex)
-print(str(resultMaxValue)+ " " +str(resultIndex))
-print(max_value(test_tab))
+#print(str(resultMaxValue)+ " " +str(resultIndex))
+#print(max_value(test_tab))
     
 
 #Reverse a table
