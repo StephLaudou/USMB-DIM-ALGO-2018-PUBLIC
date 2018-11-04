@@ -48,6 +48,7 @@ def average_above_zero(tab):
 
 #Test fonction average    
 #test_tab=[1,2,3,8] #¯ decl liste
+#test_tab=[0,0]
 #moy=average_above_zero(test_tab)
 #print('Positive valus average =')
 #print(moy)# print reçoit un bloc quidoit être d etype homogène
@@ -95,11 +96,12 @@ def max_value(tab):
 
 
 #Tests fonction maximum value    
-##test_tab=[1,2,3,15,9] #¯ decl liste
-#resultMaxValue,resultIndex=max_value(test_tab)
+test_tab=[1,2,3,15,9] #¯ decl liste
+resultMaxValue,resultIndex=max_value(test_tab)
 #print(resultMaxValue)
 #print(resultIndex)
-#print(str(resultMaxValue)+ " " +str(resultIndex))
+print(str(resultMaxValue)+ " " +str(resultIndex))
+print(max_value(test_tab))
     
 
 #Reverse a table

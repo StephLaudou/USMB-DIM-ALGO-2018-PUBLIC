@@ -74,3 +74,8 @@ def test_S1_selective_average_with_string_values():
         assert False
     except ValueError:
         assert True
+        
+
+
+
+
