@@ -109,6 +109,47 @@ def test_S1_max_value_standard_list():
     test_MVList=[1,2,3,15,9]
     assert load_S1_script().max_value(test_MVList) == (15,3)
     
+def test_S1_max_value_negative_value():   
+    # @test validates max_value works  with input which is an empty list
+    test_MVList=[1,2,-100,15,9]
+    assert load_S1_script().max_value(test_MVList) == (15,3)
+    
+##Reverse_table
+def test_revertTable_empty():
+    testList=[]
+    assert testList==load_S1_script().reverse_table(testList)
+    
+def test_revertTable_singleElement():
+    testList=[1]
+    assert testList==load_S1_script().reverse_table(testList)
+    
+def test_revertTable_evenElement():
+    testList=[1,2]
+    import copy
+    testList_copy=copy.deepcopy(testList)
+    print('reverseTable:{inL}=>{out}'.format(inL=testList_copy,out=load_S1_script().reverse_table(testList))) 
+    assert[2,1]==load_S1_script().reverse_table(testList)
+    
+def test_revertTable_oddElement():
+    testList=[1,2,3]  
+    assert[3,2,1]==load_S1_script().reverse_table(testList)
+
+def test_revertTable_error_list():
+    try:
+        testList='a';
+        load_S1_script().reverse_table(testList)
+        assert False
+    except ValueError:
+        assert True
+
+##roi_box
+        
+        
+        
+    
+
+
+    
 
 
     

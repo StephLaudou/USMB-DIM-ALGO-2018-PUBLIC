@@ -210,7 +210,7 @@ def roi_bbox(inputMat):
     if not (isinstance(inputMat, np.ndarray)):
         raise ValueError('Expected an array as Input')
     if not (inputMat.dtype == np.bool):
-        raise ValueError('Expected input of type mumpy.bool')
+        raise ValueError('Expected input of type numpy.bool')
         
     lmin=inputMat.shape[0]
     lmax=0
@@ -219,14 +219,15 @@ def roi_bbox(inputMat):
         
     for l in range(inputMat.shape[0]):# .shape donne le tuple
         for c in range(inputMat.shape[1]):
-            if l<lmin:
-                lmin=l
-            if l>lmax:
-                lmax=l
-            if c<cmin:
-                cmin=c
-            if c>cmax:
-                cmax=c
+            if inputMat[l,c]:
+                if l<lmin:
+                    lmin=l
+                if l>lmax:
+                    lmax=l
+                if c<cmin:
+                    cmin=c
+                if c>cmax:
+                    cmax=c
     roi=[[lmin,cmin],
          [lmin,cmax],
          [lmax,cmin],
