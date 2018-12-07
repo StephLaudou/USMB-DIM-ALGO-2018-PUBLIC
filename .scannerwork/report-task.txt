@@ -1,0 +1,7 @@
+organization=stephlaudou-github
+projectKey=USMB-DIM-ALGO-2018-PUBLIC
+serverUrl=https://sonarcloud.io
+serverVersion=7.4.0.17856
+dashboardUrl=https://sonarcloud.io/dashboard?id=USMB-DIM-ALGO-2018-PUBLIC
+ceTaskId=AWZO3okdMw52PrQC0RFm
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWZO3okdMw52PrQC0RFm
