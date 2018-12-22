@@ -34,8 +34,6 @@ def average_above_zero(tab):
     
    
     for val in tab:
-        if not (val.dtype == np.float):
-            raise ValueError('Expected a float type value')
         if val>0:
            valSum=valSum+float(val)
            nPositiveValues=nPositiveValues+1
