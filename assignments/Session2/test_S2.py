@@ -4,7 +4,7 @@ Created on Mon Oct  8 15:36:02 2018
 
 @author: derobest
 """
-
+import numpy as np
 def test_basicTrue():
     """ one of the simplest test that does nothing except saying it works..."""
     assert True
@@ -70,10 +70,14 @@ def test_S1_selective_average_with_negative_values():
     #check_S1_selective_average([0,-7])
     check_S1_selective_average([8,7,-7])
     
-def test_S1_selective_average_with_string_values():
+def test_S1_selective_average_with_string_values():#################################
     ##
     # @test validates average_above_zero works fine with integer values <=0
-    check_S1_selective_average(['ab','c'])
+    try:
+        check_S1_selective_average(['ab','c'])
+        assert False
+    except ValueError:
+        assert True
     
 def test_S1_selective_average_with_empty_list():
     ##
@@ -115,26 +119,26 @@ def test_S1_max_value_negative_value():
     assert load_S1_script().max_value(test_MVList) == (15,3)
     
 ##Reverse_table
-def test_revertTable_empty():
+def test_S1_revertTable_empty():
     testList=[]
     assert testList==load_S1_script().reverse_table(testList)
     
-def test_revertTable_singleElement():
+def test_S1_revertTable_singleElement():
     testList=[1]
     assert testList==load_S1_script().reverse_table(testList)
     
-def test_revertTable_evenElement():
+def test_S1_revertTable_evenElement():###################################################
     testList=[1,2]
-    import copy
-    testList_copy=copy.deepcopy(testList)
-    print('reverseTable:{inL}=>{out}'.format(inL=testList_copy,out=load_S1_script().reverse_table(testList))) 
+    #import copy
+    #testList_copy=copy.deepcopy(testList)
+    #print('reverseTable:{inL}=>{out}'.format(inL=testList_copy,out=load_S1_script().reverse_table(testList))) 
     assert[2,1]==load_S1_script().reverse_table(testList)
     
-def test_revertTable_oddElement():
+def test_S1_revertTable_oddElement():
     testList=[1,2,3]  
     assert[3,2,1]==load_S1_script().reverse_table(testList)
 
-def test_revertTable_error_list():
+def test_S1_revertTable_error_list():
     try:
         testList='a';
         load_S1_script().reverse_table(testList)
@@ -143,8 +147,14 @@ def test_revertTable_error_list():
         assert True
 
 ##roi_box
-        
-        
+def test_S1_roiBBox_regular():
+    inputMat=np.zeros((5,6),dtype=np.bool)
+    inputMat[2:4,3:5]=np.ones((2,2),dtype=np.bool)
+#    assert (load_S1_script().roi_bbox(inputMat)==[[2,3],[2,4],[3,3],[3,4]])
+    np.testing.assert_array_equal(load_S1_script().roi_bbox(inputMat), [[2,3],[2,4],[3,3],[3,4]])
+    
+test_S1_roiBBox_regular()
+
         
     
 

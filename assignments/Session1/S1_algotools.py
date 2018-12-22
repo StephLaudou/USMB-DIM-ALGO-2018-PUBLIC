@@ -25,9 +25,8 @@ def average_above_zero(tab):
     Value error if input tab is ot a list  
     
     """
-    if not (isinstance(tab, list)):#on verifie si c'st bien une liste (eliminer les cas d'erreur)
+    if not (isinstance(tab, list)):#on verifie si c'est bien une liste (eliminer les cas d'erreur)
         raise ValueError('Expected a list as Input')
-
     average = -99 
     
     valSum =0.0 #on le met en float
@@ -35,6 +34,8 @@ def average_above_zero(tab):
     
    
     for val in tab:
+        if not (val.dtype == np.float):
+            raise ValueError('Expected a float type value')
         if val>0:
            valSum=valSum+float(val)
            nPositiveValues=nPositiveValues+1
@@ -134,6 +135,10 @@ def reverse_table(inputList):
     return inputList
 
 
+#testList=[1,2]
+#retour = reverse_table(testList)
+#print(retour)
+    
 #TEST LISTE VIDE
 #TEST LISTE 1 ELET
 #TEST LISTE PAIRE et IMPAIRE
@@ -234,18 +239,20 @@ def roi_bbox(inputMat):
          [lmax,cmax]]
     return np.array(roi)
 
-#inputMat=np.ones((5.6),dtype=np.bool) #permet de créer une matrice de binaire, 5 li 6 col ones = Trus
-##inputMat=np.zeros((5,6),dtype=np.bool) #permet de créer une matrice de binaire, 5 li 6 col zero= False
+
+
+#inputMat=np.ones((5.6),dtype=np.bool) #permet de créer une matrice de binaire, 5 li 6 col ones = True
+inputMat=np.zeros((5,6),dtype=np.bool) #permet de créer une matrice de binaire, 5 li 6 col zero= False
 #fill some points within it
 #inputMat[2.3]=True
 #inputMat[2.4]=True
 #OU
-##inputMat[2:4,3:5]=np.ones((2,2),dtype=np.bool) #on remplit avec des true en créant une nouvelle petite matrice
+inputMat[2:4,3:5]=np.ones((2,2),dtype=np.bool) #on remplit avec des true en créant une nouvelle petite matrice
 ##print(inputMat.shape[0])#nb de ligne
 ##print(inputMat.shape[1])#nb de colonne
-##print('inputMat='+str(inputMat))
-##roi=roi_bbox(inputMat)
-##print('roi='+str(roi))
+print('inputMat='+str(inputMat))
+roi=roi_bbox(inputMat)
+print('roi='+str(roi))
 
 
 #Autre solution 
