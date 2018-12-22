@@ -240,17 +240,17 @@ def roi_bbox(inputMat):
 
 
 #inputMat=np.ones((5.6),dtype=np.bool) #permet de créer une matrice de binaire, 5 li 6 col ones = True
-inputMat=np.zeros((5,6),dtype=np.bool) #permet de créer une matrice de binaire, 5 li 6 col zero= False
+#inputMat=np.zeros((5,6),dtype=np.bool) #permet de créer une matrice de binaire, 5 li 6 col zero= False
 #fill some points within it
 #inputMat[2.3]=True
 #inputMat[2.4]=True
 #OU
-inputMat[2:4,3:5]=np.ones((2,2),dtype=np.bool) #on remplit avec des true en créant une nouvelle petite matrice
+#inputMat[2:4,3:5]=np.ones((2,2),dtype=np.bool) #on remplit avec des true en créant une nouvelle petite matrice
 ##print(inputMat.shape[0])#nb de ligne
 ##print(inputMat.shape[1])#nb de colonne
-print('inputMat='+str(inputMat))
-roi=roi_bbox(inputMat)
-print('roi='+str(roi))
+#print('inputMat='+str(inputMat))
+#roi=roi_bbox(inputMat)
+#print('roi='+str(roi))
 
 
 #Autre solution 
@@ -444,28 +444,63 @@ def sort_selective(list):
  
     
     """
+    
     iLastCompare = len(list)-1 #last position to be compared
     
     for iNotSorted in range(0,iLastCompare):# on ne traite pas le dernier indice
         iSmallest = iNotSorted
-        
+
         for iSearch in range(iSmallest,len(list)):
+
             if list[iSmallest] > list[iSearch]:
                 iSmallest = iSearch
-    
+                
         backUpValue = list[iNotSorted]
         list[iNotSorted] = list[iSmallest]
         list[iSmallest] = backUpValue
+        print(list)
+    
 
     return list
 
 #list=[3,1]        
 #list=[10,-15,7,1,3,3,9,12,4]
-#list=[10,15,7,1,3,3,9,12,4]
+#list=[10,15,7,1,3,3,9]
 #list=[]
 #list=[9,12,4]
 #print(sort_selective(list))
-    
+"""   
+(a) Illustrate the algorithm on the following vector sample : 10, 15, 7, 1, 3, 3, 9 
+[10, 15, 7, 1, 3, 3, 9]
+[1, 15, 7, 10, 3, 3, 9]
+[1, 3, 7, 10, 15, 3, 9]
+[1, 3, 3, 10, 15, 7, 9]
+[1, 3, 3, 7, 15, 10, 9]
+[1, 3, 3, 7, 9, 10, 15]
+
+(b) Does the number of iterations depend on the vector content ? 
+Non, le nombre d'itération dépend de la longueur du vecteur
+(c) How many iterations are required to sort the whole vector ? 
+6 iterations
+(d) How many permutations are applied ? 
+6 permutations
+(e) How many comparisons are applied ? 
+27 comparisons
+(f) Can you quantify the algorithm complexity ? 
+(n*(n-1))/2 : complexite quadratique
+(g) Compare the number of permutations and comparisons for input vectors of varying sizes : 50, 100 and 500  
+#Comparaisons:
+50*49/2 + 50 = 1275
+100*99/2 + 100 = 5050
+500*499/2 + 500 = 125250
+C/C :  le nb de comparaisons augmente très vite par rapport au nb de valeurs à trier
+#Permutations:
+50
+100
+500
+C/C : le nb de permutations est linéaire ce qui est intéressant si l'ordre des valeurs est aléatoire et que les permutations sont couteuses
+
+"""
 
 def sort_bubble(list):
     """
@@ -479,20 +514,20 @@ def sort_bubble(list):
     Raises : 
     
     """
-               
-    for iSortedRight in range(len(list),0,-1):
+    
+    for iSortedRight in range(len(list),0,-1):        
         for j in range(0,iSortedRight-1):
             if list[j]>list[j+1]:
                 backUpValue = list[j]
                 list[j] = list[j+1]
                 list[j+1] = backUpValue
+            print(list)
   
-                
     return list
 
 #list=[3,1]
 #list=[1,2,3]
-#list=[10,15,7,1,3,3,9,12]
+#list=[10,15,7,1,3,3,9]
 #list=[10,15,7,1,3,3,9,12,4]
 #list=[9,12,4]
 #list=[1,0,-15,7,1,3,3,9,12,4]
@@ -500,9 +535,43 @@ def sort_bubble(list):
 
 #print(sort_bubble(list))
 
+"""
+(a) Illustrate the algorithm on the following vector sample : 10, 15, 7, 1, 3, 3, 9 
+[10, 15, 7, 1, 3, 3, 9]
+[10, 7, 15, 1, 3, 3, 9]
+[10, 7, 1, 15, 3, 3, 9]
+[10, 7, 1, 3, 15, 3, 9]
+[10, 7, 1, 3, 3, 15, 9]
+[10, 7, 1, 3, 3, 9, 15]
+[7, 10, 1, 3, 3, 9, 15]
+[7, 1, 10, 3, 3, 9, 15]
+[7, 1, 3, 10, 3, 9, 15]
+[7, 1, 3, 3, 10, 9, 15]
+[7, 1, 3, 3, 9, 10, 15]
+[1, 7, 3, 3, 9, 10, 15]
+[1, 3, 7, 3, 9, 10, 15]
+[1, 3, 3, 7, 9, 10, 15]
+...
+(b) Does the number of iterations depend on the vector content ? 
+Le nombre d'iterations depend du contenu du vecteur
+(c) How many iterations are required to sort the whole vector ? 
+7 iterations dans la première boucle
+(d) How many permutations are applied ?
+13 permutations
+(e) How many comparisons are applied ? 
+21 comparaisons
+(f) Can you quantify the algorithm complexity ? 
+(n*(n-1))/2 : complexite quadratique en moyenne
+(g) Compare the number of permutations and comparisons for input vectors of varying sizes : 50, 100 and 500 
+#comparaisons
+50*49/2 = 1225
+100*99/2 = 4950
+500*499/2 = 124750
+C/C :  là aussi le nb d'iterations augmente très vite par rapport au nb de valeurs à trier
+#permutations
+il dépend de l'état du vecteur : si le vecteur est dans l'ordre il n'y en a pas, mais s'il est trié inverse, il y en a autant que de comparaisons, donc beaucoup (quadratique)
 
-
-
+"""
 
 
 

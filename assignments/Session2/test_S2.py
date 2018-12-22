@@ -143,11 +143,50 @@ def test_S1_roiBBox_regular():
     inputMat[2:4,3:5]=np.ones((2,2),dtype=np.bool)
 #    assert (load_S1_script().roi_bbox(inputMat)==[[2,3],[2,4],[3,3],[3,4]])
     np.testing.assert_array_equal(load_S1_script().roi_bbox(inputMat), [[2,3],[2,4],[3,3],[3,4]])
+
+
+##fill_sparse
+def test_S1_RandomFillSparse_regular():    
+    matrix = np.array([["","","","","",""],["","","","","",""],["","","","","",""]])
+    k=4
+    randomX=load_S1_script().random_fill_sparse(matrix,k)
     
-test_S1_roiBBox_regular()
+    cpt=0
+    for nlig in range(len(randomX)):
+            for ncol in range (len(randomX[0])):
+                if randomX[nlig][ncol] == 'X':
+                    cpt+= 1
+    
+    assert cpt==k
+
+
+##remove_whiteSpace
+def test_S1_RemoveWhiteSpace_regular():    
+    word = 'st ri ng'
+    assert 'string'==load_S1_script().remove_whitespace(word)
+
+
+#shuffle
+def test_S1_Shuffle():
+    list= ["pomme","pêche","poire","abricot"]
+    shuffledList = load_S1_script().remove_whitespace(list)
+    assert len(list)==len(shuffledList)
+
+
+def test_S1_SortSelective():
+    list=[10,15,7,1,3,3,9]
+    expectedSortedList=[1,3,3,7,9,10,15]
+    assert expectedSortedList==load_S1_script().sort_selective(list)
+    
+def test_S1_SortBubble():
+    list=[10,15,7,1,3,3,9]
+    expectedSortedList=[1,3,3,7,9,10,15]
+    assert expectedSortedList==load_S1_script().sort_bubble(list)
+
+
 
         
-    
+
 
 
     
