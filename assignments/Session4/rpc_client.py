@@ -22,6 +22,9 @@ import os
 import amqp
 import uuid
 import time
+import numpy as np
+import msgpack
+import msgpack_numpy as m
 
 ###establishing connection and declaring the queue to publish request
 amqp_url = amqp.key
@@ -41,7 +44,11 @@ callback_queue = result.method.queue
 corr_id = str(uuid.uuid4())
 
 #send request
-payload_message = 'hello, how fine ?'
+#payload_message = 'hello, how fine ?'
+#payload_message = {'type':0, 'value':'hello, how fine ?' }
+payload_message = np.random.random((20,30))
+payload_message = msgpack.packb(payload_message, default= m.encode)
+
 channel.basic_publish(exchange='',
                       routing_key='rpc_queue',
                       body=payload_message,
@@ -70,3 +77,25 @@ while response is None:
 connection.close()
 
 time.sleep(15) 
+
+"""
+Messaging, what kind of message should you manage?
+
+Answers to questions:
+1) payload_message = {'type':0, 'value':'hello, how fine ?' }
+2) No it crashed with error : TypeError: unhashable type: 'slice'
+3) body=str(payload_message) : it works with the dictionary
+4) payload_message = np.random.random((20,30)) 
+    Thanks to str serialization it also works fine
+5) With msgpack comparison of payload size:
+    Example:
+        Encoded payload size: 4837
+        Decoded payload size: 9340
+    
+    Data is about 40% of original size after encoding. Compression ratio = 1,93
+    Note that compression ratio varies depending on the payload_message contents.
+
+    
+    
+    
+"""

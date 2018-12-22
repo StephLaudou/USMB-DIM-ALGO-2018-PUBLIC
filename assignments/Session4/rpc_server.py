@@ -18,6 +18,9 @@ Raises :
 import pika
 import os
 import amqp
+import msgpack
+import msgpack_numpy as m
+import sys
 
 ###establishing connection and declaring the queue
 amqp_url = amqp.key
@@ -31,7 +34,11 @@ channel.queue_declare(queue='rpc_queue')
 
 #send the response back
 def on_request(ch,method,props,body):
-    print('Request is ',str(body));
+    print("Encoded payload size:",sys.getsizeof(body))
+    decoded_message = str(msgpack.unpackb(body, object_hook=m.decode))
+    print("Decoded payload size:",sys.getsizeof(decoded_message))
+
+    print('Request is ', decoded_message);
     response ='Fine and you ?'
     
     ch.basic_publish(exchange='',

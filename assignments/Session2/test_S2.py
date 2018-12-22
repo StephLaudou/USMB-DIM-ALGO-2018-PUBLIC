@@ -156,7 +156,6 @@ def test_S1_RandomFillSparse_regular():
             for ncol in range (len(randomX[0])):
                 if randomX[nlig][ncol] == 'X':
                     cpt+= 1
-    
     assert cpt==k
 
 
